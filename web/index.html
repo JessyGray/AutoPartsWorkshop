@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101827">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="description" content="מערכת מקומית לניהול מלאי ומכירות חלקי חילוף לרכב">
+  <title>AutoParts Workshop</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <script src="js/theme-init.js"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="splash" class="splash" aria-label="המערכת נטענת" aria-live="polite">
+    <div class="splash-orb splash-orb-one" aria-hidden="true"></div>
+    <div class="splash-orb splash-orb-two" aria-hidden="true"></div>
+    <div class="splash-stage">
+      <div class="splash-brand" aria-hidden="true">
+        <span class="splash-ring splash-ring-outer"></span>
+        <span class="splash-ring splash-ring-inner"></span>
+        <span class="splash-logo-shell"><img src="assets/icons/app-icon.svg" alt=""></span>
+        <span class="splash-spark splash-spark-one"></span>
+        <span class="splash-spark splash-spark-two"></span>
+      </div>
+      <div class="splash-copy">
+        <span class="splash-kicker">WORKSHOP INVENTORY SYSTEM</span>
+        <strong id="splashName">AutoParts Workshop</strong>
+        <span class="splash-tagline">מלאי, מכירות וגיבוי — במקום אחד</span>
+      </div>
+      <div class="splash-loader" aria-hidden="true"><span></span></div>
+      <div class="splash-status"><i aria-hidden="true"></i><span id="splashStatus">מתחברים לענן המאובטח…</span></div>
+      <div class="splash-mechanism" aria-hidden="true">
+        <img class="splash-bolt" src="assets/images/bolt.svg" alt="">
+        <img class="splash-nut" src="assets/images/nut.svg" alt="">
+      </div>
+    </div>
+    <div class="splash-foot" aria-hidden="true"><span>CLOUD DATA</span><i></i><span>ALL DEVICES</span></div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="app-shell">
+    <aside id="sidebar" class="sidebar">
+      <div class="brand">
+        <img src="assets/icons/app-icon.svg" alt="" class="brand-icon">
+        <div><strong id="brandName">AutoParts</strong><span>WORKSHOP SYSTEM</span></div>
+      </div>
+
+      <nav id="mainNav" class="main-nav" aria-label="ניווט ראשי">
+        <button class="nav-item active" data-page="dashboard"><img src="assets/icons/dashboard.svg" alt=""><span>לוח ראשי</span></button>
+        <button class="nav-item" data-page="sale"><img src="assets/icons/sale.svg" alt=""><span>מכירה חדשה</span></button>
+        <button class="nav-item" data-page="inventory"><img src="assets/icons/inventory.svg" alt=""><span>מלאי חלקים</span></button>
+        <button class="nav-item" data-page="product"><img src="assets/icons/product.svg" alt=""><span>חלק חדש</span></button>
+        <button class="nav-item" data-page="sales"><img src="assets/icons/history.svg" alt=""><span>מכירות</span></button>
+        <button class="nav-item" data-page="count"><img src="assets/icons/count.svg" alt=""><span>ספירת מלאי</span></button>
+        <button class="nav-item" data-page="movements"><img src="assets/icons/movements.svg" alt=""><span>תנועות מלאי</span></button>
+        <button class="nav-item" data-page="backup"><img src="assets/icons/backup.svg" alt=""><span>גיבוי ושחזור</span></button>
+        <button class="nav-item" data-page="settings"><img src="assets/icons/settings.svg" alt=""><span>הגדרות</span></button>
+      </nav>
+
+      <button id="logoutButton" class="sidebar-logout" type="button"><span>יציאה בטוחה</span><b aria-hidden="true">↪</b></button>
+      <div id="sidebarBackup" class="sidebar-status"><span class="status-dot"></span><div><b>גיבוי לא מחובר</b><small>בחר תיקייה קבועה</small></div></div>
+      <div class="build-label">SECURE CLOUD · MULTI DEVICE</div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-leading">
+          <button id="menuButton" class="icon-button menu-button" aria-label="פתח תפריט"><span></span><span></span><span></span></button>
+          <div><h1 id="pageTitle">לוח ראשי</h1><p id="pageSubtitle">תמונת מצב מהירה של הסדנה</p></div>
+        </div>
+        <div class="topbar-actions">
+          <span id="clock" class="clock"></span>
+          <button id="themeToggle" class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="החלפת מצב בהיר / כהה" title="מצב בהיר / כהה">
+            <svg class="theme-toggle-icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2.4M12 19.1v2.4M4.93 4.93l1.7 1.7M17.37 17.37l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.93 19.07l1.7-1.7M17.37 6.63l1.7-1.7"></path></svg>
+            <svg class="theme-toggle-icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.7A8.3 8.3 0 1 1 9.3 3.8a6.7 6.7 0 0 0 10.9 10.9Z"></path></svg>
+            <span class="theme-toggle-thumb" aria-hidden="true"></span>
+          </button>
+          <button id="headerBackup" class="icon-button" title="גיבוי עכשיו"><img src="assets/icons/backup.svg" alt="גיבוי"></button>
+          <button id="headerSettings" class="profile-button" title="הגדרות"><span class="profile-mark">AP</span><span class="profile-copy"><b id="profileBusiness">AutoParts</b><small>מנהל מערכת</small></span><img src="assets/icons/settings.svg" alt="הגדרות"></button>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section id="page-dashboard" class="page active">
+          <div class="hero-card">
+            <div class="hero-copy"><span class="eyebrow"><i></i> הענן מחובר ומסונכרן</span><h2 id="heroTitle">ניהול חלקי חילוף בלי בלגן</h2><p>מכירה מהירה וסנכרון אוטומטי בין המחשב לטלפון.</p><div class="hero-actions"><button class="button primary" data-go="sale">מכירה חדשה</button><button class="button soft" data-go="product">הוספת חלק</button></div></div>
+            <div class="hero-art" aria-hidden="true">
+              <span class="hero-ring hero-ring-1"></span>
+              <span class="hero-ring hero-ring-2"></span>
+              <img class="hero-art-main" src="assets/images/hero-mechanic.svg" alt="">
+              <img class="hero-art-nut hero-art-nut-1" src="assets/images/nut.svg" alt="">
+              <img class="hero-art-nut hero-art-nut-2" src="assets/images/nut.svg" alt="">
+              <img class="hero-art-bolt" src="assets/images/bolt.svg" alt="">
+            </div>
+          </div>
+          <div id="stats" class="stats-grid"></div>
+          <div class="dashboard-grid">
+            <article class="panel"><div class="panel-heading"><div><span class="section-kicker">גישה מהירה</span><h2>פעולות יומיות</h2></div></div><div class="quick-grid"><button data-go="sale"><img src="assets/icons/sale.svg" alt=""><b>מכירה</b><span>פתח סל חדש</span></button><button data-go="inventory"><img src="assets/icons/inventory.svg" alt=""><b>מלאי</b><span>מצא ועדכן חלקים</span></button><button data-go="count"><img src="assets/icons/count.svg" alt=""><b>ספירה</b><span>התאם מלאי בפועל</span></button><button data-go="backup"><img src="assets/icons/backup.svg" alt=""><b>גיבוי</b><span>שמור עותק בטוח</span></button></div></article>
+            <article class="panel"><div class="panel-heading"><div><span class="section-kicker">דורש תשומת לב</span><h2>מלאי נמוך</h2></div><button class="text-button" data-go="inventory">לכל המלאי</button></div><div id="lowStockList" class="compact-list"></div></article>
+          </div>
+          <div id="backupWarning" class="system-banner"></div>
+        </section>
+
+        <section id="page-sale" class="page">
+          <div class="sale-layout">
+            <article class="panel catalog-panel">
+              <div class="panel-heading responsive-heading"><div><span class="section-kicker">קטלוג חלקים</span><h2>בחר חלק למכירה</h2></div><label class="search-box"><img src="assets/icons/search.svg" alt=""><input id="saleSearch" type="search" placeholder="חיפוש לפי שם, מק״ט או ברקוד"></label></div>
+              <div id="saleCategories" class="category-strip" aria-label="קטגוריות חלקים"></div>
+              <div id="saleProducts" class="product-grid"></div>
+            </article>
+            <aside class="panel cart-panel">
+              <div class="cart-title"><div><span class="section-kicker">עסקה נוכחית</span><h2>סל מכירה</h2></div><span id="cartCount" class="count-badge">0</span></div>
+              <div id="cart" class="cart-lines"></div>
+              <div class="cart-fields"><label>הנחה<div class="currency-input"><span aria-hidden="true">₪</span><input id="discount" type="number" min="0" step="0.01" value="0" aria-label="הנחה בשקלים"></div></label><label>אמצעי תשלום<select id="payment"><option>מזומן</option><option>כרטיס אשראי</option><option>Bit</option><option>העברה בנקאית</option><option>אחר</option></select></label><label>הערה<input id="saleNote" maxlength="160" placeholder="אופציונלי"></label></div>
+              <div class="cart-total"><span>סה״כ לתשלום</span><strong id="total">₪0.00</strong></div>
+              <button id="completeSale" class="button primary full-width">השלם מכירה</button>
+            </aside>
+          </div>
+        </section>
+
+        <section id="page-inventory" class="page">
+          <article class="panel">
+            <div class="table-toolbar"><label class="search-box grow"><img src="assets/icons/search.svg" alt=""><input id="inventorySearch" type="search" placeholder="שם, מק״ט, ברקוד, מדף…"></label><select id="stockFilter" aria-label="סינון לפי מצב מלאי"><option value="">כל המלאי</option><option value="in">במלאי</option><option value="low">מלאי נמוך</option><option value="out">אזל מהמלאי</option></select><button class="button primary" data-go="product">הוסף חלק</button></div>
+            <div class="table-scroll"><table><thead><tr><th>חלק</th><th>מק״ט</th><th>קטגוריה</th><th>כמות</th><th>מחיר</th><th>מיקום</th><th class="actions-col">פעולות</th></tr></thead><tbody id="inventoryRows"></tbody></table></div>
+          </article>
+        </section>
+
+<section id="page-product" class="page">
+          <article class="panel form-card"><div class="panel-heading"><div><span class="section-kicker">כרטיס חלק</span><h2 id="productFormTitle">חלק חילוף חדש</h2><p>שדות מסומנים בכוכבית הם חובה.</p></div><button id="cancelProductEdit" class="button ghost hidden" type="button">ביטול עריכה</button></div>
+            <form id="productForm" class="form-grid" novalidate><input id="productId" type="hidden"><label class="span-2">שם החלק *<input id="productName" required maxlength="120" placeholder="לדוגמה: רפידות בלם קדמיות"></label><label>מק״ט<input id="productSku" maxlength="60" placeholder="נוצר אוטומטית אם ריק"></label><label>קטגוריה *<input id="productCategory" list="categoryOptions" required placeholder="בחר או כתוב"><datalist id="categoryOptions"><option value="פילטרים"><option value="בלמים"><option value="מנוע"><option value="חשמל והצתה"><option value="מתלים והיגוי"><option value="קירור ומיזוג"><option value="גיר ותמסורת"><option value="שמנים ונוזלים"><option value="מרכב ותאורה"><option value="צמיגים וגלגלים"><option value="אביזרים"></datalist></label><label>ברקוד<input id="productBarcode" maxlength="80"></label><label>מחיר מכירה ₪ *<input id="productSale" type="number" min="0" step="0.01" required></label><label>מחיר קנייה ₪<input id="productBuy" type="number" min="0" step="0.01"></label><label>כמות התחלתית<input id="productQuantity" type="number" min="0" step="1" value="0"></label><label>התראת מלאי נמוך<input id="productMin" type="number" min="0" step="1" value="0"></label><label>יחידת מידה<input id="productUnit" maxlength="30" value="יחידה"></label><label>מיקום / מדף<input id="productLocation" maxlength="60" placeholder="A-03"></label><label class="span-2">התאמת רכב והערות<textarea id="productNotes" maxlength="500" placeholder="יצרן, דגם, שנתון, מנוע או הערת התקנה"></textarea></label><div class="form-actions span-2"><button class="button primary" type="submit">שמור חלק</button><button id="clearProductForm" class="button ghost" type="button">נקה טופס</button></div></form>
+          </article>
+        </section>
+
+        <section id="page-sales" class="page"><article class="panel"><div class="table-toolbar"><label class="search-box grow"><img src="assets/icons/search.svg" alt=""><input id="salesSearch" type="search" placeholder="מספר מכירה או שם חלק"></label></div><div id="salesList" class="sales-list"></div></article></section>
+
+        <section id="page-count" class="page"><article class="panel"><div class="panel-heading responsive-heading"><div><span class="section-kicker">התאמה פיזית</span><h2>ספירת מלאי</h2><p>שמירה מעדכנת את המלאי בענן ומורידה דוח CSV למכשיר.</p></div><button id="startCount" class="button primary">התחל ספירה חדשה</button></div><label class="field-block">הערת ספירה<input id="countNote" maxlength="180"></label><div id="countRows" class="count-list"></div><button id="saveCount" class="button primary full-width hidden">שמור ספירה ועדכן מלאי</button></article><article class="panel"><div class="panel-heading"><div><span class="section-kicker">ארכיון</span><h2>ספירות קודמות</h2></div></div><div id="countHistory" class="history-grid"></div></article></section>
+
+        <section id="page-movements" class="page"><article class="panel"><div class="table-scroll"><table><thead><tr><th>תאריך</th><th>חלק</th><th>לפני</th><th>שינוי</th><th>אחרי</th><th>סוג</th><th>סיבה</th></tr></thead><tbody id="movementRows"></tbody></table></div></article></section>
+
+        <section id="page-backup" class="page"><div class="settings-grid"><article class="panel"><div class="settings-icon"><img src="assets/icons/backup.svg" alt=""></div><h2>גיבוי בענן</h2><p>כל שינוי נשמר אוטומטית ב־Supabase ומסתנכרן לכל המכשירים.</p><div class="button-row"><button id="chooseBackupFolder" class="button primary">בדוק שמירה</button><button id="backupNow" class="button ghost">צור נקודת גיבוי</button></div><p id="backupFolderInfo" class="helper-text"></p></article><article class="panel"><div class="settings-icon"><img src="assets/icons/history.svg" alt=""></div><h2>ייצוא ושחזור</h2><p>הורד עותק JSON למכשיר או שחזר קובץ קיים. לפני שחזור נשמר עותק בטיחות בענן.</p><div class="button-row"><button id="exportBackup" class="button ghost">הורד JSON</button><label class="button ghost file-button">בחר קובץ לשחזור<input id="importBackup" type="file" accept="application/json,.json"></label></div></article><article class="panel span-full network-panel"><div class="network-copy"><span class="section-kicker">גישה מכל מכשיר</span><h2>אותו מלאי במחשב וב־Android</h2><p>פתח את אותה כתובת בדפדפן והיכנס עם אותו אימייל וסיסמה. אין צורך באותה רשת Wi‑Fi.</p><div class="network-url"><code id="phoneUrl">כתובת האתר</code><button id="copyPhoneUrl" class="button ghost" type="button">העתק כתובת</button></div></div><div class="qr-shell"><img src="assets/icons/app-icon-192.png" alt="AutoParts Workshop"></div></article><article class="panel span-full"><div class="panel-heading"><div><span class="section-kicker">בדיקת מערכת</span><h2>דיאגנוסטיקה בענן</h2></div><button id="runDiagnostics" class="button ghost">הפעל בדיקה</button></div><div id="diagnostics" class="diagnostics-grid"></div></article></div></section>
+
+        <section id="page-settings" class="page"><div class="settings-grid"><article class="panel span-full"><div class="panel-heading"><div><span class="section-kicker">התאמה אישית</span><h2>הגדרות העסק</h2><p>המידע נשמר בענן ונכלל בגיבויים.</p></div></div><form id="settingsForm" class="form-grid"><label class="span-2">שם העסק *<input id="settingBusinessName" required maxlength="80"></label><label>טלפון<input id="settingPhone" maxlength="40"></label><label>כתובת<input id="settingAddress" maxlength="140"></label><label>מטבע<select id="settingCurrency"><option value="ILS">₪ — ILS</option><option value="USD">$ — USD</option><option value="EUR">€ — EUR</option></select></label><label>צבע מערכת<select id="settingAccent"><option value="orange">כתום מוסך</option><option value="blue">כחול מקצועי</option><option value="green">ירוק מלאי</option></select></label><label class="toggle-field span-2"><span><b>אפשר מלאי שלילי</b><small>לא מומלץ. מאפשר מכירה גם כשהמלאי אפס.</small></span><input id="settingNegative" type="checkbox" role="switch"></label><div class="form-actions span-2"><button class="button primary" type="submit">שמור הגדרות</button></div></form></article><article class="panel"><h2>אודות המערכת</h2><dl class="about-list"><div><dt>גרסה</dt><dd>5.0 Cloud</dd></div><div><dt>מצב עבודה</dt><dd>Web + Android</dd></div><div><dt>אחסון</dt><dd>Supabase Cloud</dd></div></dl></article><article class="panel danger-zone"><h2>אזור זהירות</h2><p>אין למחוק נתונים בלי גיבוי תקין. פעולות מכירה וארכיון נשמרות בהיסטוריה.</p><button id="openBackupFromSettings" class="button ghost">פתח גיבוי ושחזור</button></article></div></section>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="actionDialog" class="action-dialog">
+    <form id="dialogForm" method="dialog">
+      <div class="dialog-icon"><img src="assets/icons/settings.svg" alt=""></div>
+      <h2 id="dialogTitle">אישור פעולה</h2>
+      <p id="dialogDescription"></p>
+      <label id="dialogValueField">כמות<input id="dialogValue" type="number"></label>
+      <label id="dialogReasonField">סיבה<input id="dialogReason" maxlength="180"></label>
+      <div class="dialog-actions"><button id="dialogCancel" class="button ghost" type="button">ביטול</button><button id="dialogConfirm" class="button primary" type="submit">אישור</button></div>
+    </form>
+  </dialog>
+
+  <script src="js/cloud-config.js" defer></script>
+  <script src="js/cloud-auth.js" defer></script>
+  <script src="js/core.js" defer></script>
+  <script src="js/server-api.js" defer></script>
+  <script src="js/backup.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

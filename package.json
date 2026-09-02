@@ -1,0 +1,13 @@
+{
+  "name": "autoparts-workshop",
+  "version": "5.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-static.mjs",
+    "test": "npm run build && node --test tests/cloud-static.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
