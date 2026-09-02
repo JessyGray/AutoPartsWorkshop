@@ -1,0 +1,26 @@
+name: Prepare source
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    if: ${{ hashFiles('AutoPartsWorkshop-source.zip') != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract clean source
+        run: |
+          unzip -o AutoPartsWorkshop-source.zip
+          rm AutoPartsWorkshop-source.zip
+      - name: Commit source tree
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Add AutoParts Workshop cloud source"
+          git push
