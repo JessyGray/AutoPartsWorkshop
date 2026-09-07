@@ -120,14 +120,44 @@
     $(".profile-mark").textContent = initials || "AP";
   }
 
+  function closeSidebar() {
+    $("#sidebar").classList.remove("open");
+    $("#menuButton").setAttribute("aria-expanded", "false");
+  }
+
+  function bindSidebarEvents() {
+    const sidebar = $("#sidebar");
+    const menuButton = $("#menuButton");
+    const mobile = window.matchMedia("(max-width: 780px)");
+    menuButton.setAttribute("aria-controls", "sidebar");
+    closeSidebar();
+    menuButton.addEventListener("click", () => {
+      if (!mobile.matches) return;
+      const open = sidebar.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(open));
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (mobile.matches && !sidebar.contains(event.target) && !menuButton.contains(event.target)) {
+        closeSidebar();
+      }
+    }, true);
+    document.addEventListener("keydown", (event) => {
+      if (mobile.matches && event.key === "Escape" && sidebar.classList.contains("open")) {
+        closeSidebar();
+        menuButton.focus();
+      }
+    });
+    mobile.addEventListener("change", closeSidebar);
+  }
+
   function showPage(pageName) {
+    closeSidebar();
     if (!pageMeta[pageName]) pageName = "dashboard";
     currentPage = pageName;
     $$(".page").forEach((page) => page.classList.toggle("active", page.id === `page-${pageName}`));
     $$(".nav-item").forEach((button) => button.classList.toggle("active", button.dataset.page === pageName));
     $("#pageTitle").textContent = pageMeta[pageName][0];
     $("#pageSubtitle").textContent = pageMeta[pageName][1];
-    $("#sidebar").classList.remove("open");
     renderPage(pageName);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -402,6 +432,7 @@
     $("#mainNav").addEventListener("click", (event) => {
       const button = event.target.closest("[data-page]");
       if (button) {
+        closeSidebar();
         if (button.dataset.page === "product") resetProductForm();
         showPage(button.dataset.page);
       }
@@ -413,7 +444,7 @@
         showPage(button.dataset.go);
       }
     });
-    $("#menuButton").addEventListener("click", () => $("#sidebar").classList.toggle("open"));
+    bindSidebarEvents();
     $("#themeToggle").addEventListener("click", () => {
       const next = currentTheme() === "dark" ? "light" : "dark";
       applyTheme(next);
