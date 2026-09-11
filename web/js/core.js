@@ -151,7 +151,6 @@
     const category = String(input.category || "").trim();
     const sku = String(input.sku || "").trim() || nextSku();
     if (!name) throw new Error("חובה להזין שם חלק");
-    if (!category) throw new Error("חובה לבחור קטגוריה");
     if (database.products.some((product) => product.active && product.id !== editingId && product.sku.toLowerCase() === sku.toLowerCase())) {
       throw new Error("המק״ט כבר קיים במערכת");
     }

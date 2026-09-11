@@ -287,7 +287,7 @@
       ? products.map((product) => {
           const stockClass = product.quantity <= 0 ? "out" : product.quantity <= product.minStock ? "low" : "";
           const stockText = product.quantity <= 0 ? "אזל" : product.quantity <= product.minStock ? "נמוך" : "במלאי";
-          return `<tr><td class="product-cell"><b>${escapeHtml(product.name)}</b><small>${escapeHtml(product.notes || "ללא הערה")}</small></td><td>${escapeHtml(product.sku)}</td><td>${escapeHtml(product.category)}</td><td><span class="quantity-status ${stockClass}">${product.quantity} ${escapeHtml(product.unit)} · ${stockText}</span></td><td class="money">${formatMoney(product.saleMinor)}</td><td>${escapeHtml(product.location || "—")}</td><td><div class="row-actions"><button class="row-action" data-product-action="edit" data-id="${product.id}">עריכה</button><button class="row-action" data-product-action="restock" data-id="${product.id}">הוסף מלאי</button><button class="row-action" data-product-action="adjust" data-id="${product.id}">תיקון</button><button class="row-action danger" data-product-action="writeoff" data-id="${product.id}">פחת</button><button class="row-action danger" data-product-action="archive" data-id="${product.id}">ארכיון</button></div></td></tr>`;
+          return `<tr><td class="product-cell"><b>${escapeHtml(product.name)}</b><small>${escapeHtml(product.notes || "ללא הערה")}</small></td><td>${escapeHtml(product.sku)}</td><td>${escapeHtml(product.category || "ללא קטגוריה")}</td><td><span class="quantity-status ${stockClass}">${product.quantity} ${escapeHtml(product.unit)} · ${stockText}</span></td><td class="money">${formatMoney(product.saleMinor)}</td><td>${escapeHtml(product.location || "—")}</td><td><div class="row-actions"><button class="row-action" data-product-action="edit" data-id="${product.id}">עריכה</button><button class="row-action" data-product-action="restock" data-id="${product.id}">הוסף מלאי</button><button class="row-action" data-product-action="adjust" data-id="${product.id}">תיקון</button><button class="row-action danger" data-product-action="writeoff" data-id="${product.id}">פחת</button><button class="row-action danger" data-product-action="archive" data-id="${product.id}">ארכיון</button></div></td></tr>`;
         }).join("")
       : `<tr><td colspan="7"><div class="empty-state"><img src="assets/images/empty-parts.svg" alt=""><b>אין חלקים להצגה</b><span>שנה את החיפוש או הוסף חלק חדש.</span></div></td></tr>`;
   }
@@ -296,7 +296,14 @@
     $("#productId").value = product.id;
     $("#productName").value = product.name;
     $("#productSku").value = product.sku;
-    $("#productCategory").value = product.category;
+    const categorySelect = $("#productCategory");
+    categorySelect.querySelector("[data-custom-category]")?.remove();
+    if (product.category && ![...categorySelect.options].some((option) => option.value === product.category)) {
+      const legacyCategory = new Option(product.category, product.category);
+      legacyCategory.dataset.customCategory = "true";
+      categorySelect.add(legacyCategory);
+    }
+    categorySelect.value = product.category;
     $("#productBarcode").value = product.barcode;
     $("#productSale").value = (product.saleMinor / 100).toFixed(2);
     $("#productBuy").value = (product.purchaseMinor / 100).toFixed(2);
@@ -312,6 +319,7 @@
 
   function resetProductForm() {
     $("#productForm").reset();
+    $("#productCategory").querySelector("[data-custom-category]")?.remove();
     $("#productId").value = "";
     $("#productQuantity").disabled = false;
     $("#productQuantity").value = 0;
