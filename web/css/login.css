@@ -51,6 +51,7 @@ button { cursor: pointer; }
 @keyframes sceneFloat { 50% { transform: translateY(-10px) rotate(1deg); } }
 @keyframes cardIn { from { opacity: 0; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: none; } }
 @media (max-width: 900px) {
+  #authForm input { font-size: 16px; }
   .auth-shell { display: block; background: radial-gradient(circle at 80% -5%, #183752, #08111f 43%, #f5f7fa 43%); }
   .auth-visual { display: none; }
   .auth-panel { min-height: 100vh; min-height: 100dvh; align-content: center; gap: 24px; padding: max(25px, env(safe-area-inset-top)) 18px max(18px, env(safe-area-inset-bottom)); background: linear-gradient(180deg, transparent 0 22%, #f5f7fa 22%); }
