@@ -30,8 +30,21 @@ assert.doesNotMatch(config, /service_role|sb_secret_/);
 
 const index = read("index.html");
 assert.match(index, /class="currency-input"[\s\S]*?>₪<[\s\S]*?id="discount"/);
+assert.match(index, /<select id="productCategory">/);
+assert.doesNotMatch(index, /id="productCategory"[^>]*\brequired\b/);
+assert.doesNotMatch(index, /<datalist id="categoryOptions">/);
+const categoryMarkup = index.match(/<select id="productCategory">([\s\S]*?)<\/select>/)?.[1] || "";
+assert.ok((categoryMarkup.match(/<option/g) || []).length >= 35, "product category list should remain comprehensive");
 assert.ok(index.indexOf("cloud-config.js") < index.indexOf("cloud-auth.js"));
 assert.ok(index.indexOf("cloud-auth.js") < index.indexOf("server-api.js"));
+
+const appCss = read("css/styles.css");
+const loginCss = read("css/login.css");
+assert.match(appCss, /@media \(max-width: 780px\)[\s\S]*?input, select, textarea \{ font-size: 16px; \}/);
+assert.match(loginCss, /@media \(max-width: 900px\)[\s\S]*?#authForm input \{ font-size: 16px; \}/);
+
+const core = read("js/core.js");
+assert.doesNotMatch(core, /חובה לבחור קטגוריה/);
 
 const sql = fs.readFileSync(path.join(root, "supabase", "SUPABASE_SETUP.sql"), "utf8");
 assert.match(sql, /enable row level security/);
