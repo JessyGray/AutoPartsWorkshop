@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101827">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="description" content="תיקון ומכירת צמיגים: מחירון, צמיגים במלאי וקביעת תור">
+  <title>פנצ'רייה</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/customer.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-top">
+      <img class="hero-logo" src="../assets/icons/app-icon.svg" alt="">
+      <select id="langSelect" class="lang-select" aria-label="Language">
+        <option value="he">עברית</option>
+        <option value="ru">Русский</option>
+        <option value="ar">العربية</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+    <h1 id="shopName">פנצ'רייה</h1>
+    <p data-i18n="tagline"></p>
+    <span id="openStatus" class="open-status"></span>
+    <nav class="quick-actions">
+      <a id="callLink" class="action action-call" href="#"><span aria-hidden="true">📞</span><b data-i18n="call"></b></a>
+      <a id="waLink" class="action action-wa" href="#" target="_blank" rel="noopener"><span aria-hidden="true">💬</span><b data-i18n="whatsapp"></b></a>
+      <a id="wazeLink" class="action action-nav" href="#" target="_blank" rel="noopener"><span aria-hidden="true">📍</span><b data-i18n="navigate"></b></a>
+    </nav>
+  </header>
+
+  <section class="flat-banner">
+    <div>
+      <strong data-i18n="flatTitle"></strong>
+      <span data-i18n="flatText"></span>
+    </div>
+    <a id="flatLink" class="flat-button" href="#" target="_blank" rel="noopener" data-i18n="flatButton"></a>
+  </section>
+
+  <nav class="tabs" role="tablist">
+    <button type="button" role="tab" data-tab="services" data-i18n="tabServices" aria-selected="true"></button>
+    <button type="button" role="tab" data-tab="tires" data-i18n="tabTires"></button>
+    <button type="button" role="tab" data-tab="book" data-i18n="tabBook"></button>
+    <button type="button" role="tab" data-tab="info" data-i18n="tabInfo"></button>
+  </nav>
+
+  <main>
+    <section id="panel-services" class="panel" role="tabpanel">
+      <h2 data-i18n="servicesTitle"></h2>
+      <ul id="serviceList" class="service-list"></ul>
+      <p class="note" data-i18n="servicesNote"></p>
+    </section>
+
+    <section id="panel-tires" class="panel" role="tabpanel" hidden>
+      <h2 data-i18n="tiresTitle"></h2>
+      <input id="tireSearch" type="search" inputmode="search" autocomplete="off" data-i18n-placeholder="tiresSearch">
+      <p id="tireStatus" class="note"></p>
+      <ul id="tireList" class="tire-list"></ul>
+      <a id="askSizeLink" class="secondary-button" href="#" target="_blank" rel="noopener" data-i18n="askSize"></a>
+    </section>
+
+    <section id="panel-book" class="panel" role="tabpanel" hidden>
+      <h2 data-i18n="bookTitle"></h2>
+      <form id="bookForm" novalidate>
+        <label><span data-i18n="name"></span><input id="fName" autocomplete="name" maxlength="80" required></label>
+        <label><span data-i18n="phone"></span><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" dir="ltr" required></label>
+        <label><span data-i18n="service"></span><select id="fService" required></select></label>
+        <label id="tireSizeField"><span><span data-i18n="tireSize"></span> <small data-i18n="optional"></small></span><input id="fTireSize" maxlength="30" dir="ltr" placeholder="205/55R16"></label>
+        <div class="row">
+          <label><span data-i18n="date"></span><input id="fDate" type="date" required></label>
+          <label><span data-i18n="time"></span><select id="fTime"></select></label>
+        </div>
+        <label><span><span data-i18n="plate"></span> <small data-i18n="optional"></small></span><input id="fPlate" maxlength="16" dir="ltr" autocomplete="off"></label>
+        <label><span><span data-i18n="notes"></span> <small data-i18n="optional"></small></span><textarea id="fNotes" rows="3" maxlength="500"></textarea></label>
+        <p id="formError" class="form-error" role="alert" hidden></p>
+        <button id="submitButton" class="primary-button" type="submit" data-i18n="submit"></button>
+      </form>
+      <div id="bookDone" class="book-done" hidden>
+        <div class="done-icon" aria-hidden="true">✓</div>
+        <h3 data-i18n="sentTitle"></h3>
+        <p data-i18n="sentText"></p>
+        <a id="doneWaLink" class="secondary-button" href="#" target="_blank" rel="noopener" data-i18n="sendWhatsapp"></a>
+        <button id="newRequest" class="link-button" type="button" data-i18n="newRequest"></button>
+      </div>
+    </section>
+
+    <section id="panel-info" class="panel" role="tabpanel" hidden>
+      <h2 data-i18n="hoursTitle"></h2>
+      <dl id="hoursList" class="hours"></dl>
+      <h2 data-i18n="addressTitle"></h2>
+      <p id="addressText"></p>
+    </section>
+  </main>
+
+  <script src="js/customer-config.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/customer.js"></script>
+</body>
+</html>
