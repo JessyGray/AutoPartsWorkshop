@@ -7,4 +7,5 @@ const output = path.join(root, "dist");
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 await cp(path.join(root, "web"), output, { recursive: true });
+await cp(path.join(root, "customer"), path.join(output, "customer"), { recursive: true });
 console.log("Static cloud application built in dist/");

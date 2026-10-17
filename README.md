@@ -30,3 +30,20 @@ npm test
 ```
 
 The output is a static, CDN-hostable site in `dist/`.
+
+## Customer app (`/customer/`)
+
+A public, mobile-first page for the shop's customers, deployed with the same build at `https://<site>/customer/`. Hebrew by default, with Russian, Arabic and English.
+
+- Price list of services with a "book" button for each.
+- Tires in stock, read live from the inventory (only name, sale price and an in-stock flag; purchase prices, quantities and notes stay private).
+- Appointment requests saved to Supabase, with an optional WhatsApp copy.
+- Call, WhatsApp, Waze and an urgent "I have a flat" button.
+
+Setup:
+
+1. Run `supabase/CUSTOMER_APP_SETUP.sql` in the Supabase SQL Editor (after `SUPABASE_SETUP.sql`).
+2. Run its last block with your inventory login e-mail to publish your shop, and copy the returned `owner_id`.
+3. In `customer/js/customer-config.js` set `shopId`, shop name, phone, WhatsApp, address, hours and prices.
+
+Open `/customer/?demo=1` to preview with sample tires before setup.
