@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-static.mjs",
-    "test": "npm run build && node --test tests/cloud-static.test.mjs"
+    "test": "npm run build && node --test tests/cloud-static.test.mjs tests/customer-static.test.mjs"
   },
   "engines": {
     "node": ">=20"
