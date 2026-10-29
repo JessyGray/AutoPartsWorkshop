@@ -20,7 +20,12 @@ jobs:
         run: |
           URL=$(grep -oE 'https://[a-z0-9]+\.supabase\.co' web/js/cloud-config.js)
           KEY=$(grep -oE 'sb_publishable_[A-Za-z0-9_-]+' web/js/cloud-config.js)
-          # Any answer from Postgres counts as activity, including "permission denied".
-          CODE=$(curl -sS -o /dev/null -w "%{http_code}" "$URL/rest/v1/workshop_states?select=owner_id&limit=1" -H "apikey: $KEY")
-          echo "HTTP $CODE"
-          [ "$CODE" -gt 0 ] && [ "$CODE" -lt 500 ]
+          # anon cannot read this table, so Postgres itself answers "permission denied" (42501).
+          # That still counts as activity; a gateway or key error does not and fails the run.
+          CODE=$(curl -sS -o body.json -w "%{http_code}" "$URL/rest/v1/workshop_states?select=owner_id&limit=1" -H "apikey: $KEY")
+          echo "HTTP $CODE"; cat body.json; echo
+          case "$CODE" in
+            2??) exit 0 ;;
+            401|403) grep -q '"42501"' body.json ;;
+            *) exit 1 ;;
+          esac
