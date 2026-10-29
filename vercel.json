@@ -1,5 +1,11 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "cleanUrls": false
+  "cleanUrls": false,
+  "functions": {
+    "api/keepalive.js": { "includeFiles": "web/js/cloud-config.js" }
+  },
+  "crons": [
+    { "path": "/api/keepalive", "schedule": "0 6 * * *" }
+  ]
 }
