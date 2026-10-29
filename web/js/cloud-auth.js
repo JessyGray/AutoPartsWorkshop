@@ -25,7 +25,11 @@
       throw new Error("השרת אינו זמין כרגע. בדוק את החיבור לאינטרנט ונסה שוב בעוד דקה.");
     }
     if (response.status >= 520) throw new Error("השרת אינו זמין כרגע. נסה שוב בעוד דקה.");
-    const result = await response.json().catch(() => ({}));
+    let text;
+    try { text = await response.text(); }
+    catch { throw new Error("השרת אינו זמין כרגע. בדוק את החיבור לאינטרנט ונסה שוב בעוד דקה."); }
+    let result = {};
+    try { result = text ? JSON.parse(text) : {}; } catch { /* non-JSON body, e.g. logout */ }
     if (!response.ok) throw new Error(result.msg || result.error_description || result.message || "שגיאת התחברות");
     return result;
   }
