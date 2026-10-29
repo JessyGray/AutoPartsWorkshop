@@ -13,11 +13,18 @@
     else localStorage.removeItem(STORAGE_KEY);
   }
   async function authRequest(path, body, accessToken = "") {
-    const response = await fetch(`${config.url}/auth/v1/${path}`, {
-      method: "POST",
-      headers: { apikey: config.publishableKey, "Content-Type": "application/json", ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}) },
-      body: JSON.stringify(body || {})
-    });
+    let response;
+    try {
+      response = await fetch(`${config.url}/auth/v1/${path}`, {
+        method: "POST",
+        headers: { apikey: config.publishableKey, "Content-Type": "application/json", ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}) },
+        body: JSON.stringify(body || {})
+      });
+    } catch {
+      // The browser reports a down or paused Supabase project as a bare "Failed to fetch".
+      throw new Error("השרת אינו זמין כרגע. בדוק את החיבור לאינטרנט ונסה שוב בעוד דקה.");
+    }
+    if (response.status >= 520) throw new Error("השרת אינו זמין כרגע. נסה שוב בעוד דקה.");
     const result = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(result.msg || result.error_description || result.message || "שגיאת התחברות");
     return result;
